@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+
+    <changeSet id="unique_set_airports_01" author="vdrogaytsev">
+        <createTable tableName="airports">
+            <column name="id" type="bigint" >
+                <constraints nullable="false" primaryKey="true" primaryKeyName="airport_id_pk"/>
+            </column>
+            <column name="name" type="varchar(255)" remarks="Название аэропорта">
+                <constraints nullable="false"/>
+            </column>
+            <column name="capacity" type="int" remarks="Вместимость аэропорта">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

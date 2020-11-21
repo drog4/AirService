@@ -16,6 +16,12 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <liquibase.host>localhost</liquibase.host>
+        <liquibase.port>5432</liquibase.port>
+        <liquibase.db>AirServiceDb</liquibase.db>
+        <liquibase.schema>public</liquibase.schema>
+        <liquibase.user>postgres</liquibase.user>
+        <liquibase.password>12345</liquibase.password>
     </properties>
 
     <dependencies>
@@ -68,6 +74,10 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -75,6 +85,21 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <configuration>
+                    <outputFileEncoding>UTF-8</outputFileEncoding>
+                    <driver>org.postgresql.Driver</driver>
+                    <url>
+                        jdbc:postgresql://${liquibase.host}:${liquibase.port}/${liquibase.db}?currentSchema=${liquibase.schema}
+                    </url>
+                    <username>${liquibase.user}</username>
+                    <password>${liquibase.password}</password>
+                    <changeLogFile>src/main/resources/database_changelog.xml</changeLogFile>
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                </configuration>
             </plugin>
         </plugins>
     </build>
